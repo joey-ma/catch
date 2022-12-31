@@ -1,13 +1,47 @@
 document.addEventListener('DOMContentLoaded', () => {
+
   const welcomeMessage = 'Welcome!\n'
-    + 'Some keyboard shortcuts while you enjoy this game: \n'
-    + 'Pressing E will set game level to Easy;\n'
-    + 'pressing N will set game level to Normal;\n'
-    + 'pressing Hard will set game level to Hard;\n'
-    + 'pressing Enter will restart the game;'
-    + 'and finally, pressing M will mute the audio!';
+    + "This game contains sound effects triggered by game events.\nHint: If you're at work, you might want to mute your audio. \n\n"
+    + 'Some optional keyboard shortcuts:\n'
+    + 'Press P to play and pause the music, and M to mute the audio.\n'
+    + 'Press E, N, H to set game level to Easy, Normal, or Hard.\n'
+    + 'Press Enter to restart the game.\n';
+  
+  
+  // It is more common not to set the `SameSite` attribute, which results in the default, and more secure, value of `SameSite=Lax;`
+  const cookieValue = document.cookie.split('; ').find((row) => row.startsWith('test2='))?.split('=')[1];
+
+  function alertOnce(message) {
+    if (!document.cookie.split('; ').find((row) => row.startsWith('alerted'))) {
+      // Note that we are setting `SameSite=None;` in this example because the example
+      // needs to work cross-origin.
+      // It is more common not to set the `SameSite` attribute, which results in the default,
+      // and more secure, value of `SameSite=Lax;`
+      document.cookie = "alerted=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;"
+
+      alert(message);
+    }
+  }
+
+  alertOnce(welcomeMessage);
 
   console.log(welcomeMessage);
+
+  
+//   alert(`Welcome! 
+
+// If you're at work, you might want to mute your audio. This game contains sound effects triggered by game events.`
+//   )
+  
+//   alert(`Some keyboard shortcuts for you as you play this game:
+// Press 'P' to play and pause the music. Sometimes.
+// Press 'M' to mute the audio.
+// Press 'E' to set game level to Easy.
+// Press 'N' to set game level to Normal.
+// Press 'H' to set game level to Hard.
+// Press 'Enter' will also restart the game when seeing the "GAME OVER" screen.
+//   `)
+  // alert(`If you're at work, you might want to mute your audio! This game contains audio sound effects triggered by game events.`)
 
   // * for wip pausing game functionality
   // const gamePaused = {
@@ -86,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         head.SPEED = 75;
         console.log('Game level set to Hard.');
         break;
-      // custom muting function
+      // using keyboard to mute music
       case 'KeyM':
         if (musicPlayer.volume === 0) {
           musicPlayer.volume = 0.15;
@@ -95,11 +129,30 @@ document.addEventListener('DOMContentLoaded', () => {
           musicPlayer.volume = 0;
           console.log('Music volume turned to 0 here.');
         }
+
+        if (head.death.muted === false) head.death.muted = true;
+        else head.death.muted = false;
+        
         break;
-      // music play / pause feature not working well
+      // using keyboard to play / pause music
       case 'KeyP':
-        if (musicPlayer.paused) musicPlayer.play();
-        else musicPlayer.pause();
+        // console.log('music player paused:', musicPlayer.paused, 'game over music paused: ', head.death.paused)
+
+        if (head.gameOverStatus) {
+          if (!head.death.paused) {
+            head.death.pause();
+          } else {
+            head.death.play();
+          }
+          return;
+        }
+
+        if (musicPlayer.paused) {
+          musicPlayer.play();
+        } else {
+          musicPlayer.pause();
+        }
+
         break;
       // reloads page when hitting 'Enter' key
       case 'Enter':
