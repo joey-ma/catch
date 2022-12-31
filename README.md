@@ -3,6 +3,20 @@
 Snake is one of the [first video game genres](https://en.wikipedia.org/wiki/Snake_(video_game_genre)).
 Catch, a browser based version of the classic snake game, is created using an understanding of OOP and DOM manipulation to create this dynamic, single-page app. Catch is a tribute to both the classic snake game as well as the Pokemon franchise. (I still remember playing the 1st generation (monochrome) and 2nd generation (color) Game Boys! Anyways...) Hope you'll enjoy!
 
+## Gotta Catch 'Em All
+
+The game was built for desktop users in mind, and it is optimized for mobile devices.
+
+Click anywhere inside the #gameboard, and you can use up, down, left, right arrow keys to start the game and move Ash.
+
+Some keyboard shortcuts for you as you play this game: 
+Press `P` to play and pause the music.
+Press `M` to mute the audio!
+Press `E` to set game level to Easy.
+Press `N` to set game level to Normal.
+Press `H` to set game level to Hard.
+Press `Enter` to restart the game when seeing the "GAME OVER" screen.
+
 ## Learning Objectives
 
 - Using JavaScript to change the look and behavior of the DOM
