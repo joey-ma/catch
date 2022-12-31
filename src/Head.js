@@ -7,7 +7,7 @@ class Head {
     this.node.setAttribute('src', 'assets/img/ash.png');
     el.appendChild(this.node);
 
-    console.dir(document.getElementById('score'));
+    // console.dir(document.getElementById('score'));
     this.score = Number(document.getElementById('score').innerText); // initial score
     this.scoreboard = document.querySelector('#scoreboard');
 
@@ -30,6 +30,7 @@ class Head {
     this.death.autoplay = true;
     this.death.pause();
 
+    this.gameOverStatus = false;
     // Note: worked on usual browsers but not on iPad
     // this.pikaSounds = [
     //   './assets/sfx/pikachu.mp3',
@@ -111,7 +112,8 @@ class Head {
 
       // randomize a new audio clip each time when capturing a pikachu
       const atRandom = Math.floor(Math.random() * 7);
-      console.log(atRandom);
+      console.log(`playing a random pikachu sound effect at random`);
+
       const pikaSounds = [
         './assets/sfx/pikachu.mp3',
         './assets/sfx/pika-1.mp3',
@@ -131,7 +133,7 @@ class Head {
     } else {
       // if the snake did not eat apple (as the game continues)
       // remove the added body
-      console.log(snakeBody);
+      // console.log('snakeBody:', snakeBody);
       snakeBody.shift().node.remove();
     }
 
@@ -157,6 +159,7 @@ class Head {
   }
 
   gameOver() {
+    this.gameOverStatus = true;
     // take off the last body part added
     // (the body part generated at the last location of the head)
     snakeBody.pop().node.remove();
@@ -179,9 +182,13 @@ class Head {
     const musicPlayer = document.querySelector('#controllersContainer > audio');
     if (musicPlayer) musicPlayer.pause();
 
-    this.death.volume = 0.15;
+    this.death.volume = 0.1;
     this.death.play();
 
+    // console.log('this.death:', this.death)
+    // console.dir(this.death)
+
     clearTimeout(time);
+
   }
 }
