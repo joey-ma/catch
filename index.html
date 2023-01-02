@@ -1,64 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gotta Catch Em All!</title>
-  <script src='src/Head.js' defer></script>
-  <script src='src/Body.js' defer></script>
-  <script src='src/Apple.js' defer></script>
-  <link rel="stylesheet" href="src/styles.css">
-  <link rel="shortcut icon" type="image/jpg" href="assets/img/pokeball-icon.png"/>
-</head>
-<body>
-  <!-- scoreboard -->
-  <div id="scoreboard">Score: 0</div>
-  <div id="controllersContainer">
-    <audio src="./assets/bgm/106-the_road_to_viridian_city-from_palette.mp3" controls></audio>
-    <audio id="bonk" src="./assets/sfx/bonk.mp3"></audio>
-    <audio id="death" src="./assets/bgm/145-ending.mp3"></audio>
-    <audio id="sfx1" src="./assets/sfx/pikachu.mp3"></audio>
-    <audio id="sfx2" src="./assets/sfx/pika-1.mp3"></audio>
-    <audio id="sfx3" src="./assets/sfx/pika-2.mp3"></audio>
-    <audio id="sfx4" src="./assets/sfx/pika-3.mp3"></audio>
-    <audio id="sfx5" src="./assets/sfx/pika-pika.mp3"></audio>
-    <audio id="sfx6" src="./assets/sfx/pika-pika-pika-chu.mp3"></audio>
-    <audio id="sfx7" src="./assets/sfx/pika-pika-pika-pika.mp3"></audio>
-  </div>
-  <!-- scoreboard hides behind gameboard -->
-  <div id="gameboard"></div>
-  <div id="darken"></div>
-  <div id="gameover">
-    <img id="GG" src="assets/img/gameover.png">
-    <h2>Score: <span id="score">0</span></h2>
-    <button id="again">Play Again?</button>
-  </div>
-  <script>
-    // console.log('ideal screenX position:', ((window.screen.availWidth - window.outerWidth) / 2));
-    // console.log('ideal screenY position:', ((window.screen.availHeight - window.innerHeight) / 2));
-    console.log(`availWidth: ${window.screen.availWidth}, availHeight: ${window.screen.availHeight}`);
-    console.log(`innerWidth: ${window.innerWidth}, innerHeight:${window.innerHeight}`);
-    console.log(`outerWidth: ${window.outerWidth}, outerHeight: ${window.outerHeight}`);
-    // console.log('screenX: ' + window.screenX + ', screenX: ' + window.screenY);
-    console.log(`innerWidth: ${window.innerWidth < 720}, innerHeight: ${window.innerHeight < 870}`);
-    // console.log(window);
-    if (window.innerWidth < 720 || window.innerHeight < 870) {
-      window.alert('Please enjoy this game on a device / browser window larger than 720 x 900 pixels. \nAlso, please note sound effects are not supported on iOS devices. Thanks!');
-    }
-    // iPad Mini
-    if (window.innerWidth === 768 && window.innerHeight === 1024) {
-      window.alert('Sorry, sound effects are not supported on iOS devices. Thanks!');
-    }
-    // iPad
-    if (window.innerWidth === 820 && window.innerHeight === 1180) {
-      window.alert('Sorry, sound effects are not supported on iOS devices. Thanks!');
-    }
-    // iPad Pro
-    if (window.innerWidth === 1024 && window.innerHeight === 1366) {
-      window.alert('Sorry, sound effects are not supported on iOS devices. Thanks!');
-    }
-  </script>
-  <script src="main.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gotta Catch Em All!</title>
+    <script src="src/Head.js" defer></script>
+    <script src="src/Body.js" defer></script>
+    <script src="src/Apple.js" defer></script>
+    <link rel="stylesheet" href="src/styles.css" />
+    <link
+      rel="shortcut icon"
+      type="image/jpg"
+      href="assets/img/pokeball-icon.png"
+    />
+  </head>
+  <body>
+    <!-- scoreboard -->
+    <div id="scoreboard">Score: 0</div>
+    <div id="controllersContainer">
+      <audio
+        src="./assets/bgm/106-the_road_to_viridian_city-from_palette.mp3"
+        controls
+      ></audio>
+      <audio id="bonk" src="./assets/sfx/bonk.mp3"></audio>
+      <audio id="death" src="./assets/bgm/145-ending.mp3"></audio>
+      <audio id="sfx1" src="./assets/sfx/pikachu.mp3"></audio>
+      <audio id="sfx2" src="./assets/sfx/pika-1.mp3"></audio>
+      <audio id="sfx3" src="./assets/sfx/pika-2.mp3"></audio>
+      <audio id="sfx4" src="./assets/sfx/pika-3.mp3"></audio>
+      <audio id="sfx5" src="./assets/sfx/pika-pika.mp3"></audio>
+      <audio id="sfx6" src="./assets/sfx/pika-pika-pika-chu.mp3"></audio>
+      <audio id="sfx7" src="./assets/sfx/pika-pika-pika-pika.mp3"></audio>
+    </div>
+    <!-- scoreboard hides behind gameboard -->
+    <div id="gameboard"></div>
+    <div id="darken"></div>
+    <div id="gameover">
+      <img id="GG" src="assets/img/gameover.png" />
+      <h2>Score: <span id="score">0</span></h2>
+      <button id="again">Play Again?</button>
+    </div>
+    <script></script>
+    <script src="main.js"></script>
+  </body>
 </html>
