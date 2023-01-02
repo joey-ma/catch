@@ -3,21 +3,49 @@ document.addEventListener('DOMContentLoaded', () => {
   const welcomeMessage = 'Welcome!\n'
     + "This game contains sound effects triggered by game events.\nHint: If you're at work, you might want to mute your audio. \n\n"
     + 'Some optional keyboard shortcuts:\n'
-    + 'Press P to play and pause the music, and M to mute the audio.\n'
+    + 'Press P to play and pause the music, and M to mute.\n'
     + 'Press E, N, H to set game level to Easy, Normal, or Hard.\n'
     + 'Press Enter to restart the game.\n';
   
-  
-  // It is more common not to set the `SameSite` attribute, which results in the default, and more secure, value of `SameSite=Lax;`
-  const cookieValue = document.cookie.split('; ').find((row) => row.startsWith('test2='))?.split('=')[1];
+  function alertNotOptimized() {
+    // console.log('ideal screenX position:', ((window.screen.availWidth - window.outerWidth) / 2));
+    // console.log('ideal screenY position:', ((window.screen.availHeight - window.innerHeight) / 2));
+    console.log(`availWidth: ${window.screen.availWidth}, availHeight: ${window.screen.availHeight}`);
+    console.log(`innerWidth: ${window.innerWidth}, innerHeight:${window.innerHeight}`);
+    console.log(`outerWidth: ${window.outerWidth}, outerHeight: ${window.outerHeight}`);
+    console.log(`innerWidth: ${window.innerWidth < 720}, innerHeight: ${window.innerHeight < 870}`);
+    // console.log('screenX: ' + window.screenX + ', screenX: ' + window.screenY);
+    // console.log(window);
+    if (window.innerWidth < 720 || window.innerHeight < 870) {
+      window.alert('Please enjoy this game on a device / browser window larger than 720 x 900 pixels. \n\nAlso note: sound effects are not supported on iOS devices. \n\nThis game is optimized for Google Chrome on a desktop. Thanks!');
+    }
+    // iPad Mini
+    if (window.innerWidth === 768 && window.innerHeight === 1024) {
+      window.alert('Sorry, sound effects are not supported on iOS devices. Thanks!');
+    }
+    // iPad
+    if (window.innerWidth === 820 && window.innerHeight === 1180) {
+      window.alert('Sorry, sound effects are not supported on iOS devices. Thanks!');
+    }
+    // iPad Pro
+    if (window.innerWidth === 1024 && window.innerHeight === 1366) {
+      window.alert('Sorry, sound effects are not supported on iOS devices. Thanks!');
+    }
+  }
 
   function alertOnce(message) {
-    if (!document.cookie.split('; ').find((row) => row.startsWith('alerted'))) {
-      // Note that we are setting `SameSite=None;` in this example because the example
-      // needs to work cross-origin.
-      // It is more common not to set the `SameSite` attribute, which results in the default,
-      // and more secure, value of `SameSite=Lax;`
+    const cookieFound = document.cookie.split('; ').find((row) => row.startsWith('alerted'));
+    // const cookieValue = document.cookie.split('; ').find((row) => row.startsWith('test2='))?.split('=')[1];
+    console.log(`🚀 -> file: main.js:21 -> alertOnce -> cookieFound`, cookieFound);
+    
+    if (cookieFound) {
+      console.log(`cookie found, do not alert: ${document.cookie}`)
+    } else {
+      console.log(`cookie not found, alerting: ${document.cookie}`)
+      // It is more common not to set the `SameSite` attribute, which results in the default, and more secure, value of `SameSite=Lax;`
+      // Note that I am setting `SameSite=None;` I'd like it to work cross-origin.
       document.cookie = "alerted=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;"
+      // ! cookie not being written on my desktop macOS Monterey Version 12.6.1 (21G217) + Safari Version 16.2 (17614.3.7.1.7, 17614)
 
       alert(message);
     }
@@ -25,23 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   alertOnce(welcomeMessage);
 
-  console.log(welcomeMessage);
+  alertNotOptimized(); // alert not optimized every time better than alerting one time; game is more enjoyable on desktop
 
-  
-//   alert(`Welcome! 
-
-// If you're at work, you might want to mute your audio. This game contains sound effects triggered by game events.`
-//   )
-  
-//   alert(`Some keyboard shortcuts for you as you play this game:
-// Press 'P' to play and pause the music. Sometimes.
-// Press 'M' to mute the audio.
-// Press 'E' to set game level to Easy.
-// Press 'N' to set game level to Normal.
-// Press 'H' to set game level to Hard.
-// Press 'Enter' will also restart the game when seeing the "GAME OVER" screen.
-//   `)
-  // alert(`If you're at work, you might want to mute your audio! This game contains audio sound effects triggered by game events.`)
+  console.log(welcomeMessage); // console logs every time for those who wants to check out the browser console
 
   // * for wip pausing game functionality
   // const gamePaused = {
@@ -302,23 +316,23 @@ document.addEventListener('DOMContentLoaded', () => {
 // todo stretch features?
 // - add iPad support for touch input swiping up, down, left, right // * done!
 // - add iPad support for continuous touch input swiping up, down, left, right // * done!
-// ? might be good to add instruction for touch input somewhere
-// ? confirmed: cannot play audio without user initiated action.
-// If you do not set the controls attribute, you must either set the autoplay attribute,
-// create a controller using JavaScript, or play the movie programmatically from JavaScript.
-// Otherwise the user has no way to play the movie.
-// Warning: To prevent unsolicited downloads over cellular networks at the user’s expense,
-// embedded media cannot be played automatically in Safari on iOS—-user always initiates playback.
-// A controller is automatically supplied on iPhone or iPod touch once playback in initiated,
-// but for iPad you must either set the controls attribute or provide a controller using JavaScript.
+// ? might be good to add instruction for touch input somewhere?
+// ? confirmed behavior for Safari: cannot play audio without user initiated action.
+  // ? If you do not set the controls attribute, you must either set the autoplay attribute, ?
+  // ? create a controller using JavaScript, or play the movie programmatically from JavaScript. ?
+  // ? Otherwise the user has no way to play the movie. ?
+  // ? Warning: To prevent unsolicited downloads over cellular networks at the user’s expense, ?
+  // ? embedded media cannot be played automatically in Safari on iOS—-user always initiates playback. ?
+  // ? A controller is automatically supplied on iPhone or iPod touch once playback in initiated, ?
+  // ? but for iPad you must either set the controls attribute or provide a controller using JavaScript. ?
 // - instead of reducing chance of apple spawning where snake is, maybe rework logic? // * done!
 // - turn off the music autoplay // * done!
 // - add mute/unmute function with keyM to mute the music // * done!
 // - add play/pause function with keyP to play/pause the music // * done!
 // - throttling seems not needed in current set up, but would be needed if this.input is removed
-// - currently music plays a small number of songs, a more advanced algo would be a plus
+// - currently music plays a small number of songs, more songs and a more advanced algo would be a plus
 // - add a pause functionality when hitting space bar
 // - look into error message(s):
-// Uncaught ReferenceError: time is not defined // ? seems like it is needed though
-// at Head.gameOver(Head.js: 144: 18)
-// at Head.move(Head.js: 75: 34)
+  // Uncaught ReferenceError: time is not defined // ? seems like it is needed though
+  // at Head.gameOver(Head.js: 144: 18)
+  // at Head.move(Head.js: 75: 34)
