@@ -5,6 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "open index.html",
+    "dev": "echo \"This app was developed using VS Code Extension Live Server by Ritwick Dey. Install it and give it a try!\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
