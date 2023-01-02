@@ -25,7 +25,7 @@ class Apple {
     for (const bodyPart of snakeBody) {
       // this.snakeBodyCoordinates.push([el.style.left, el.style.top]);
       if (x === bodyPart.node.style.left && y === bodyPart.node.style.top) {
-        console.log('//* avoided placing an apple on the snake body');
+        console.log('* avoided placing an apple on the snake body');
         return this.newPlacement();
       }
     }
