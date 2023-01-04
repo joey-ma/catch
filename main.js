@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     + 'Some optional keyboard shortcuts:\n'
     + 'Press P to play and pause the music, and M to mute.\n'
     + 'Press E, N, H to set game level to Easy, Normal, or Hard.\n'
-    + 'Press Enter to restart the game.\n';
+    + 'Press Space to pause & resume the game; Enter to restart.\n';
   
   function alertNotOptimized() {
     // console.log('ideal screenX position:', ((window.screen.availWidth - window.outerWidth) / 2));
@@ -173,49 +173,11 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.reload();
         break;
       // todo stretch feature: pause functionality ...
-      // case 'Space':
-      //   console.log(
-      //     'gamePaused: ',
-      //     gamePaused.status,
-      //     'head.SPEED (current)',
-      //     head.SPEED,
-      //     'prior speed:',
-      //     gamePaused.speed,
-      //     'current direction:',
-      //     head.currentDirection,
-      //   );
-      //   if (!gamePaused.status) {
-      //     gamePaused.speed = Number(head.SPEED);
-      //     gamePaused.status = true;
-      //     head.SPEED = 1000000;
-      //     console.log(
-      //       'gamePaused: ',
-      //       gamePaused.status,
-      //       'head.SPEED (current)',
-      //       head.SPEED,
-      //       'prior speed:',
-      //       gamePaused.speed,
-      //       'current direction:',
-      //       head.currentDirection,
-      //     );
-      //   } else {
-      //     gamePaused.status = false;
-      //     head.SPEED = Number(gamePaused.speed);
-      //     gamePaused.speed = 1000000;
-      //     console.log(
-      //       'paused: ',
-      //       gamePaused.status,
-      //       'head.SPEED (current)',
-      //       head.SPEED,
-      //       'prior speed:',
-      //       gamePaused.speed,
-      //       'current direction:',
-      //       head.currentDirection,
-      //     );
-      //   }
-      //   break;
+      case 'Space':
+        head.gamePause();
+        break;
       default:
-        // console.log(`${e.code} is not recognized`);
+        console.log(`key press ${e.code.replace('Key', '')} is not recognized`);
         break;
     }
   });
@@ -226,6 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
   easyButton.addEventListener('click', () => {
     console.log('Game level set to Easy.');
     head.SPEED = 500;
+    head.lastSPEED = 500;
   });
 
   const normalButton = document.createElement('button');
@@ -234,6 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
   normalButton.addEventListener('click', () => {
     console.log('Game level set to Normal.');
     head.SPEED = 250;
+    head.lastSPEED = 250;
   });
 
   const hardButton = document.createElement('button');
@@ -242,6 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
   hardButton.addEventListener('click', () => {
     console.log('Game level set to Hard.');
     head.SPEED = 75;
+    head.lastSPEED = 75;
   });
 
   // const sfxButton = document.createElement('button');
