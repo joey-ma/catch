@@ -14,6 +14,7 @@ class Head {
     this.input = '';
     this.currentDirection = '';
     this.SPEED = 250; // ms
+    // this.lastSPEED = 0;
 
     // place ash near the center of the gameboard
     this.node.style.left = '300px';
@@ -30,6 +31,7 @@ class Head {
     this.death.autoplay = true;
     this.death.pause();
 
+    // * Game Over Status
     this.gameOverStatus = false;
     // Note: worked on usual browsers but not on iPad
     // this.pikaSounds = [
@@ -44,6 +46,9 @@ class Head {
     // this.pikaSounds.forEach((sfx, i) => {
     //   this[i] = new Audio(sfx);
     // });
+
+    // * Game Paused Status
+    this.gamePaused = false;
 
     this.eat = document.getElementById('sfx1');
     this.eat.volume = 0;
@@ -155,7 +160,8 @@ class Head {
     }
 
     // moving the head
-    const time = setTimeout(this.move.bind(this), this.SPEED);
+    const time = () => setTimeout(this.move.bind(this), this.SPEED);
+    time();
   }
 
   gameOver() {
@@ -190,5 +196,24 @@ class Head {
 
     clearTimeout(time);
 
+  }
+
+  gamePause() {
+    if (this.gamePaused) {
+      this.SPEED = this.lastSPEED;
+      console.log('last speed', this.lastSPEED, `(setTimeout's maximum delay value) | this.speed`, this.SPEED)
+      // needs to bind this.SPEED in order to resume game
+      setTimeout(this.move.bind(this), this.SPEED);
+    } else {
+      this.lastSPEED = this.SPEED;
+      this.SPEED = 2147483647;
+      console.log('last speed', this.lastSPEED, '| this.speed', this.SPEED, `(setTimeout's maximum delay value) `)
+      // The value of Number.MAX_SAFE_INTEGER is 9007199254740991 (about 285616.414724 years)
+      // however, setTimeout's maximum delay value is 2,147,483,647 (about 24.8 days)
+      // https://developer.mozilla.org/en-US/docs/Web/API/setTimeout#maximum_delay_value
+      // I'll live with this limitation for now
+    }
+    
+    this.gamePaused = !this.gamePaused;
   }
 }
