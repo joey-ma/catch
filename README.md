@@ -21,7 +21,8 @@ Press `M` to mute the audio!
 Press `E` to set game level to Easy.  
 Press `N` to set game level to Normal.  
 Press `H` to set game level to Hard.  
-Press `Enter` to restart the game when seeing the "GAME OVER" screen.
+Press `Space` to pause and resume the game.
+Press `Enter` to restart the game at anytime.
 
 ## Learning Objectives
 
