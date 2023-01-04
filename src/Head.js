@@ -57,7 +57,7 @@ class Head {
     setTimeout(this.move.bind(this), this.SPEED);
   }
 
-  move() {
+  move() { // on every move, or technically every this.SPEED interval
     const head = this.node;
     this.currentDirection = this.input;
     const direction = this.currentDirection;
@@ -194,7 +194,11 @@ class Head {
     // console.log('this.death:', this.death)
     // console.dir(this.death)
 
-    clearTimeout(time);
+    clearTimeout(time); 
+    // produces Head.js:197 Uncaught ReferenceError: time is not defined
+    // at Head.gameOver (Head.js:197:18)
+    // at Head.move (Head.js:86:35)
+    // however, also produces desired result of stopping Ash from leaving the game board / border
 
   }
 
